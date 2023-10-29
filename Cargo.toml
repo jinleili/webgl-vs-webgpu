@@ -1,0 +1,8 @@
+[workspace]
+resolver = "2"
+members = ["webgl-vs-webgpu", "run-wasm"]
+default-members = ["webgl-vs-webgpu"]
+
+[workspace.package]
+edition = "2021"
+rust-version = "1.70"

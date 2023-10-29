@@ -1,0 +1,37 @@
+name: Deploy to GH Pages
+
+on:
+  push:
+    branches: [ master ]
+env:
+  RUST_VERSION: 1.70
+  CARGO_TERM_COLOR: always
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install wasm target
+        run: rustup target add wasm32-unknown-unknown
+
+      - name: Install wasm-bindgen-cli
+        run: cargo install wasm-bindgen-cli --version=0.2.87
+
+      - name: Build WASM
+        run: |
+          sh build-wasm.sh
+
+      - name: Install and Build vitepress
+        run: |
+          npm install
+          npm run just-build
+
+      - name: Copy wasm folder to dist/assets/
+        run: cp -r docs/.vitepress/components/wasm docs/.vitepress/dist/assets/
+
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@v4.4.1
+        with:
+          branch: gh-pages
+          folder: docs/.vitepress/dist

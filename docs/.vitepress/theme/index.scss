@@ -1,0 +1,55 @@
+// custom
+$noteColor: #eaecef66;
+$warningColor: #ff6633;
+$warningTextColor: #333333;
+$warningInlineCodeColor: #eeeeee;
+$horizontalMargin: 1.5rem;
+
+@mixin excerpt($radius) {
+    border-radius: $radius;
+    -webkit-border-radius: $radius;
+    -moz-border-radius: $radius;
+    padding: 0.5rem 1.5rem;
+}
+
+.github-link {
+    margin-top: 2rem;
+}
+
+.note {
+    background-color: $noteColor;
+    @include excerpt(6px);
+    margin: 1rem 0rem;
+}
+
+.warning,
+.warn {
+    background-color: $warningColor;
+    color: $warningTextColor;
+    @include excerpt(6px);
+}
+
+.loading {
+    color: gray;
+}
+
+canvas {
+    background-color: black;
+}
+
+.container, .gl-container {
+    display: flex;
+    justify-content: center;
+    /* 水平居中 */
+    align-items: center;
+   width: 100%;
+}
+.gl-container {
+    height: 600px;
+    width: 1200px;
+}
+
+#webgpu-container, #webgl-container {
+    flex: 1;
+    height: 100%;
+}

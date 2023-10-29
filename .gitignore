@@ -1,0 +1,21 @@
+target/
+wasm/
+node_modules/
+assets/preprocessed-wgsl/
+webgl-vs-webgpu/dist/
+
+*/Cargo.lock
+**/*.rs.bk
+.DS_Store
+.temp
+.cache
+
+/docs/.vitepress/components/wasm/*
+/docs/.vitepress/dist/*
+/docs/.vitepress/cache/*
+/docs/public/assets/
+
+# IDE/Editor configuration files
+.vscode
+.idea
+GPU-Frame-Caputre.xcodeproj/
