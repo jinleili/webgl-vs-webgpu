@@ -16,7 +16,7 @@ use wgpu::{MultisampleState, RenderPipeline, ShaderStages};
 pub struct ThousandsEntity {
     model_uniform_buf: Vec<BufferObj>,
     model_uniform_data: Vec<ModelUniformData>,
-    model_rotation_data: Vec<(glam::Vec3, f32)>,
+    model_rotation_data: Vec<(glam::Vec3, f32, f32)>,
     material_uniform_buf: BufferObj,
     bg_setting_list: Vec<BindGroupSetting>,
     pipeline_list: Vec<RenderPipeline>,
@@ -29,7 +29,7 @@ impl ThousandsEntity {
 
         // 模型 uniform
         let mut model_uniform_data: Vec<ModelUniformData> = Vec::with_capacity(PSO_COUNT);
-        let mut model_rotation_data: Vec<(glam::Vec3, f32)> = Vec::with_capacity(PSO_COUNT);
+        let mut model_rotation_data: Vec<(glam::Vec3, f32, f32)> = Vec::with_capacity(PSO_COUNT);
         let mut model_uniform_buf: Vec<BufferObj> = Vec::with_capacity(PSO_COUNT);
 
         let mut rng = rand::thread_rng();
@@ -57,7 +57,7 @@ impl ThousandsEntity {
             a_model_uniform.model_mat = (model_mat * scale_mat).to_cols_array_2d();
             let rotation_axis =
                 glam::Vec3::new(rng.gen::<f32>(), rng.gen::<f32>(), rng.gen::<f32>()).normalize();
-            model_rotation_data.push((rotation_axis, rng.gen::<f32>()));
+            model_rotation_data.push((rotation_axis, rng.gen::<f32>(), rng.gen::<f32>() + 1.));
 
             let a_model_buf =
                 BufferObj::create_uniform_buffer(device, &a_model_uniform, Some("model buffer"));
@@ -159,7 +159,7 @@ impl CompScenario for ThousandsEntity {
             let original_mat = self.model_uniform_data[i as usize];
             let model_mat = glam::Mat4::from_cols_array_2d(&original_mat.model_mat);
             let rotation_data = &mut self.model_rotation_data[i as usize];
-            rotation_data.1 += 0.05;
+            rotation_data.1 += 0.05 * rotation_data.2;
             let rotation_mat = glam::Mat4::from_axis_angle(rotation_data.0, rotation_data.1);
             let a_model_mat = (model_mat * rotation_mat).to_cols_array_2d();
             app.queue.write_buffer(
