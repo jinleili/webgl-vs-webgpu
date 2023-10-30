@@ -10,9 +10,7 @@ mod comparative_scenario;
 mod geometries;
 mod node;
 mod ui;
-
 mod util;
-use util::shader::create_shader_module;
 
 pub static DEPTH_FORMAT: wgpu::TextureFormat = wgpu::TextureFormat::Depth32Float;
 
@@ -67,7 +65,6 @@ pub struct Material {
 }
 
 impl Default for Material {
-    #[inline(always)]
     fn default() -> Material {
         Material {
             albedo: [1.0, 1.0, 1.0, 1.0],

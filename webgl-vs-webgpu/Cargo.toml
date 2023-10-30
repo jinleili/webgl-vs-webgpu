@@ -10,7 +10,9 @@ default = []
 webgl = ["wgpu/webgl", "app-surface/webgl"]
 
 [dependencies]
-app-surface = { version = "0.3.4" }
+app-surface = { version = "0.3.5" }
+# app-surface = { path = "../../idroid/wgpu-in-app/app-surface" }
+
 bitflags = "2.4"
 egui = { git = "https://github.com/jinleili/egui", rev = "2d7992e", default-features = false }
 egui-wgpu = { git = "https://github.com/jinleili/egui", rev = "2d7992e" }

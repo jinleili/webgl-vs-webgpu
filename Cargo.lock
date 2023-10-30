@@ -119,9 +119,9 @@ checksum = "a4668cab20f66d8d020e1fbc0ebe47217433c1b6c8f2040faf858554e394ace6"
 
 [[package]]
 name = "app-surface"
-version = "0.3.4"
+version = "0.3.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "690e39774b51a8c884d92d0e651356f647616e3b0cc62be9ef8bd3c17b42f2de"
+checksum = "44e6cd2823e68a284906bdc785e3454f51aba56e2c9cbc20f8b58e1cba05159f"
 dependencies = [
  "android_logger",
  "ash",

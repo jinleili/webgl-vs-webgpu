@@ -73,8 +73,14 @@ impl ThousandsEntity {
         let material_uniform_buf =
             BufferObj::create_uniform_buffer(device, &material_data, Some("material buffer"));
 
-        let polygon_shader =
-            crate::create_shader_module(device, "polygon", Some("polygon shader")).await;
+        // let polygon_shader =
+        //     crate::create_shader_module(device, "polygon", Some("polygon shader")).await;
+        let polygon_shader = device.create_shader_module(wgpu::ShaderModuleDescriptor {
+            label: Some("polygon shader"),
+            source: wgpu::ShaderSource::Wgsl(
+                include_str!("../../../assets/preprocessed-wgsl/polygon.wgsl").into(),
+            ),
+        });
 
         let mut bg_setting_list: Vec<BindGroupSetting> = Vec::with_capacity(PSO_COUNT);
         let mut pipeline_list: Vec<RenderPipeline> = Vec::with_capacity(PSO_COUNT);

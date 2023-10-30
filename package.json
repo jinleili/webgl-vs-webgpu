@@ -1,5 +1,5 @@
 {
-  "name": "webgl-vs-webgpu",
+  "name": "webgl_vs_webgpu",
   "engines": {
     "node": ">=18.0"
   },
